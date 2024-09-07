@@ -295,7 +295,8 @@ cv2.destroyAllWindows()
 
 <br>
 <br>
-## Result:
+
+# Result:
 
 Thus the images are read, displayed, and written ,and color conversion was performed  successfully using the python program.
 
