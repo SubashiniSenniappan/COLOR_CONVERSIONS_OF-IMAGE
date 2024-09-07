@@ -195,12 +195,15 @@ cv2.destroyAllWindows()
 
 ![Screenshot 2024-09-07 222036](https://github.com/user-attachments/assets/968276a2-44d0-4d66-b575-d68cb0f5974c)
 
-![Screenshot 2024-09-07 222023](https://github.com/user-attachments/assets/99b1679b-14fa-4847-9c58-6ac805724f1f)
+![Screenshot 2024-09-07 222236](https://github.com/user-attachments/assets/342ecc66-91fe-4357-adb9-4afb7a9ed84f)
 
-![Screenshot 2024-09-07 222010](https://github.com/user-attachments/assets/50bb40fd-db9f-4d4e-9e7b-df7e0cd45685)
+
+![Screenshot 2024-09-07 222255](https://github.com/user-attachments/assets/e08fc3b6-2107-49d5-9b0e-5c446d9e7b55)
 
 <br>
 <br>
+
+
 
 ### viii) RGB and BGR to YCrCb:
 
@@ -226,8 +229,31 @@ cv2.destroyAllWindows()
 
 ![Screenshot 2024-09-07 222255](https://github.com/user-attachments/assets/e769259c-b523-41db-b874-8ba530e1565a)
 
+
+![Screenshot 2024-09-07 222255](https://github.com/user-attachments/assets/dd32a99d-0708-42fb-89c7-f728d9d41739)
+
 <br>
 <br>
+
+### ix) Split and merge RGB Image
+
+```
+img = cv2.imread('subashini nptel image.jpg',1)
+img = cv2.resize(img,(300,200))
+R = img[:,:,2]
+G = img[:,:,1]
+B = img[:,:,0]
+cv2.imshow('R-Channel',R)
+cv2.imshow('G-Channel',G)
+cv2.imshow('B-Channel',B)
+merged = cv2.merge((B,G,R))
+cv2.imshow('Merged RGB image',merged)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+## OUTPUT:
+
+
 
 ## Result:
 Thus the images are read, displayed, and written ,and color conversion was performed  successfully using the python program.
