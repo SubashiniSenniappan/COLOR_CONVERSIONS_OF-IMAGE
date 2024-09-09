@@ -1,5 +1,5 @@
-# EXP NO 1
-# DATE:
+![Screenshot 2024-09-09 154823](https://github.com/user-attachments/assets/9f19077e-177b-4327-9c7a-6d073b16aada)
+
 
 # COLOR_CONVERSIONS_OF-IMAGE
 ## AIM
@@ -56,256 +56,182 @@ o	Save the final modified image to your local directory.
 
 
 ##### Program:
-### Developed By:SUBASHINI S
+### Developed By: SUBASHINI S
 ### Register Number: 212222240106
 
-
-
-
-i) Read and display the image
-
-```
-import cv2
-image=cv2.imread('subashini nptel image.jpg',1)
-image = cv2.resize(image, (400, 300))
-cv2.imshow('Subashini S',image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-## Output:
 ### i)Read and Display an Image
-
-
-![Screenshot 2024-09-07 221542](https://github.com/user-attachments/assets/667d3ae3-5a44-456d-82ff-3ee0f0cbe8ce)
-
-<br>
-<br>
-
-### ii)Write the image
-
 ```
- cv2.imwrite('b.jpg',image)
+# Step 1: Load an image from your local directory and display it
+import cv2
+image_path = 'clover.jpg'  # Replace with your image path
+image = cv2.imread(image_path)
+
+# Check if the image was loaded successfully
+if image is None:
+    print("Error: Could not read the image.")
+else:
+    cv2.imshow('Original Image', image)
+    cv2.waitKey(0)
 ```
-## OUTPUT:
-![Screenshot 2024-09-07 224247](https://github.com/user-attachments/assets/ae60011e-f611-4cf1-a68f-e6a86c1f0450)
+### OUTPUT:
 
-<br>
-<br>
 
-### iii)Shape of the Image
+![Screenshot 2024-09-09 154652](https://github.com/user-attachments/assets/b6fa9319-ed0e-45ca-950b-1629d102bb2a)
 
+### ii)Draw Shapes and Add Text
 ```
-print(image.shape)
-```
-## OUTPUT:
-![image](https://github.com/user-attachments/assets/c5fea788-3e48-415c-b2c1-9a1e5f123108)
+# Step 2: Draw Shapes and Add Text
+# Draw a line from the top-left to the bottom-right
+start_point = (0, 0)
+end_point = (image.shape[1], image.shape[0])
+line_color = (255, 0, 0)  # Blue color in BGR
+thickness = 2
+image_with_line = cv2.line(image.copy(), start_point, end_point, line_color, thickness)
 
-<br>
-<br>
+# Draw a circle at the center of the image
+center_coordinates = (image.shape[1] // 2, image.shape[0] // 2)
+radius = 50
+circle_color = (0, 255, 0)  # Green color in BGR
+thickness = 3
+image_with_circle = cv2.circle(image_with_line, center_coordinates, radius, circle_color, thickness)
 
-### iv)Access rows and columns
+# Draw a rectangle around a specific region of interest
+top_left = (50, 50)
+bottom_right = (200, 200)
+rectangle_color = (0, 0, 255)  # Red color in BGR
+thickness = 2
+image_with_rectangle = cv2.rectangle(image_with_circle, top_left, bottom_right, rectangle_color, thickness)
 
-```
-import random
-image=cv2.resize(image,(400,400))
-for i in range (150,200):
-    for j in range(image.shape[1]):
-        image[i][j]=[random.randint(0,255),
-                     random.randint(0,255),
-                     random.randint(0,255)] 
-cv2.imshow('suba-1',image)
+# Add text to the image
+text = "OpenCV Drawing"
+org = (10, 30)  # top-left corner of the text string
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_scale = 1
+text_color = (255, 255, 255)  # White color
+thickness = 2
+image_with_text = cv2.putText(image_with_rectangle, text, org, font, font_scale, text_color, thickness, cv2.LINE_AA)
+
+cv2.imshow('Image with Shapes and Text', image_with_text)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
 ```
-## OUTPUT:
+### OUTPUT:
 
-![Screenshot 2024-09-07 221607](https://github.com/user-attachments/assets/c7178e32-e443-4842-8648-b19dc76705f9)
+![Screenshot 2024-09-09 154753](https://github.com/user-attachments/assets/c22ef8a6-0087-420c-ad56-cb999caf7661)
 
-<br>
-<br>
-
-### v)Cut and paste portion of image
-
+### iii)Image Color Conversion
 ```
-image=cv2.imread('subashini nptel image.jpg',1)
-image=cv2.resize(image,(400,400))
-tag =image[130:200,110:190]
-image[110:180,120:200] = tag
-cv2.imshow('suba-2',image)
+# Step 3: Image Color Conversion
+# Convert the image from RGB to HSV and display it
+hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+cv2.imshow('HSV Image', hsv_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-## OUTPUT:
-  
-![Screenshot 2024-09-07 221626](https://github.com/user-attachments/assets/16b24aad-0ce6-4de6-97f2-cae3eb79a458)
 
-<br>
-<br>
-
-### vi) BGR and RGB to HSV and GRAY
-```
-img = cv2.imread('subashini nptel image.jpg',1)
-img = cv2.resize(img,(300,200))
-cv2.imshow('Original Image',img)
-hsv1 = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2.imshow('BGR2HSV',hsv1)
-hsv2 = cv2.cvtColor(img,cv2.
-COLOR_RGB2HSV)
-cv2.imshow('RGB2HSV',hsv2)
-gray1 = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-cv2.imshow('BGR2GRAY',gray1)
-gray2 = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
-cv2.imshow('RGB2GRAY',gray2)
+# Convert the image from RGB to GRAY and display it
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+cv2.imshow('Gray Image', gray_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
 
-```
-## OUTPUT:
-
-
-![Screenshot 2024-09-07 221741](https://github.com/user-attachments/assets/378eddb0-bd43-4c3f-99e6-d82eb956053b)
-
-![Screenshot 2024-09-07 221812](https://github.com/user-attachments/assets/d0433d95-ba10-4e72-969e-1ca6103aa80f)
-
-![Screenshot 2024-09-07 221830](https://github.com/user-attachments/assets/4a5216bb-0a2e-4efe-ae95-f223e45fbdb0)
-
-![Screenshot 2024-09-07 221839](https://github.com/user-attachments/assets/565218c9-1e43-458b-ac05-be84095329f8)
-
-![Screenshot 2024-09-07 225448](https://github.com/user-attachments/assets/0438e98f-8dab-44a1-bc7e-cb445ca8476c)
-
-<br>
-<br>
-
-### vii) HSV to RGB and BGR
-
-```
-img = cv2.imread('subashini nptel image.jpg')
-img = cv2.resize(img,(300,200))
-img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-cv2.imshow('Original HSV Image',img)
-
-RGB = cv2.cvtColor(img,cv2.COLOR_HSV2RGB)
-cv2.imshow('2HSV2BGR',RGB)
-
-BGR = cv2.cvtColor(img,cv2.COLOR_HSV2BGR)
-cv2.imshow('HSV2RGB',BGR)
-
+# Convert the image from RGB to YCrCb and display it
+ycrcb_image = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)
+cv2.imshow('YCrCb Image', ycrcb_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-## OUTPUT:
 
-![Screenshot 2024-09-07 222036](https://github.com/user-attachments/assets/9ef8fe3b-6d65-4d90-b3e5-250fc326ab3b)
-
-
-![Screenshot 2024-09-07 222023](https://github.com/user-attachments/assets/83995c36-1e6b-43b9-8822-af50b86c7e25)
-
-
-![Screenshot 2024-09-07 222010](https://github.com/user-attachments/assets/748a8902-5f91-4ece-bd58-dc8882c36e7c)
-
-
-<br>
-<br>
-
-
-
-### viii) RGB and BGR to YCrCb:
-
-```
-img = cv2.imread('subashini nptel image.jpg')
-img = cv2.resize(img,(300,200))
-cv2.imshow('Original RGB Image',img)
-
-YCrCb1 = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
-cv2.imshow('RGB-2-YCrCb',YCrCb1)
-
-YCrCb2 = cv2.cvtColor(img, cv2.COLOR_RGB2YCrCb)
-cv2.imshow('BGR-2-YCrCb',YCrCb2)
-
+# Convert the HSV image back to RGB and display it
+hsv_to_rgb_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)
+cv2.imshow('HSV to RGB Image', hsv_to_rgb_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
 ```
-## OUTPUT:
+### OUTPUT:
+# Convert the image from RGB to HSV and display it:
 
-![Screenshot 2024-09-07 222225](https://github.com/user-attachments/assets/221add10-d40b-4aa7-9396-85ff2df1f111)
+![Screenshot 2024-09-09 154823](https://github.com/user-attachments/assets/6bd0ce67-e4d6-4cc7-91d9-92fe78c8dd64)
 
-
-![Screenshot 2024-09-07 222236](https://github.com/user-attachments/assets/b98c27fa-9b77-4f70-bc45-9db8f6594eed)
-
-
-![Screenshot 2024-09-07 222255](https://github.com/user-attachments/assets/c543d382-cfb3-49e8-9016-996253b5911e)
+# Convert the image from RGB to GRAY and display it:
 
 
-<br>
-<br>
+![Screenshot 2024-09-09 154832](https://github.com/user-attachments/assets/b795186c-678a-4a5a-810e-131956e02616)
 
-### ix) Split and merge RGB Image
+# Convert the image from RGB to YCrCb and display it:
 
+
+![Screenshot 2024-09-09 154842](https://github.com/user-attachments/assets/12ba396d-9557-47cc-a351-9546ce71608d)
+
+# Convert the HSV image back to RGB and display it:
+
+![Screenshot 2024-09-09 154852](https://github.com/user-attachments/assets/ee7a5649-c052-4e95-a1c5-ff9cb130f170)
+
+### iv)Access and Manipulate Image Pixels
 ```
-img = cv2.imread('subashini nptel image.jpg',1)
-img = cv2.resize(img,(300,200))
-R = img[:,:,2]
-G = img[:,:,1]
-B = img[:,:,0]
-cv2.imshow('R-Channel',R)
-cv2.imshow('G-Channel',G)
-cv2.imshow('B-Channel',B)
-merged = cv2.merge((B,G,R))
-cv2.imshow('Merged RGB image',merged)
+# Step 4: Access and Manipulate Image Pixels
+# Access and print the value of the pixel at coordinates (100, 100)
+pixel_value = image[100, 100]
+print(f"Pixel value at (100, 100): {pixel_value}")
+
+# Modify the color of the pixel at (200, 200) to white
+image[200, 200] = [255, 255, 255]
+print(f"Modified pixel value at (200, 200): {image[200, 200]}")
+```
+### OUTPUT:
+
+
+![Screenshot 2024-09-09 155018](https://github.com/user-attachments/assets/62c539ea-1a01-4c9e-b6ca-064adb10cef4)
+
+### v)Image Resizing
+```
+# Step 5: Image Resizing
+# Resize the original image to half its size and display it
+resized_image = cv2.resize(image, (image.shape[1] // 2, image.shape[0] // 2))
+cv2.imshow('Resized Image', resized_image)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
 ```
-## OUTPUT:
+### OUTPUT:
 
-![Screenshot 2024-09-07 222435](https://github.com/user-attachments/assets/19b2cc4f-476e-4474-a3a3-15bfe0a0c8fd)
+![Screenshot 2024-09-09 155110](https://github.com/user-attachments/assets/3a1c44af-992a-4a75-9815-d7d8582ff179)
 
-![Screenshot 2024-09-07 222447](https://github.com/user-attachments/assets/6cbe2f40-7aed-41fe-8df8-1e99858bf9ed)
-
-
-![Screenshot 2024-09-07 222553](https://github.com/user-attachments/assets/df48a44d-6f2d-4b82-b43c-81c87ba7cc4d)
-
-![Screenshot 2024-09-07 222516](https://github.com/user-attachments/assets/9fbedbf6-54a7-48af-b123-94722c898e1e)
-
-<br>
-<br>
-
-### x) Split and merge HSV Image
+### vi)Image Cropping
 ```
-img = cv2.imread("subashini nptel image.jpg",1)
-img = cv2.resize(img,(300,200))
-img=cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
-H,S,V=cv2.split(img)
-cv2.imshow('Hue',H)
-cv2.imshow('Saturation',S)
-cv2.imshow('Value',V)
-merged = cv2.merge((H,S,V))
-cv2.imshow('Merged',merged)
+# Step 6: Image Cropping
+# Crop a region of interest (100x100 pixels starting at (50, 50)) and display it
+roi = image[50:150, 50:150]
+cv2.imshow('Cropped ROI Image', roi)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
 ```
+### OUTPUT:
+![Screenshot 2024-09-09 161007](https://github.com/user-attachments/assets/dce5d888-c925-4980-9eb1-3981b24341bf)
 
-## OUTPUT:
+### vii)Image Flipping
+```
+# Step 7: Image Flipping
+# Flip the original image horizontally and display it
+flipped_horizontally = cv2.flip(image, 1)
+cv2.imshow('Horizontally Flipped Image', flipped_horizontally)
+cv2.waitKey(0)
+
+# Flip the original image vertically and display it
+flipped_vertically = cv2.flip(image, 0)
+cv2.imshow('Vertically Flipped Image', flipped_vertically)
+cv2.waitKey(0)
+```
+### OUTPUT:
+# Flip the original image horizontally and display it:
+
+![Screenshot 2024-09-09 161027](https://github.com/user-attachments/assets/069db9d9-86b5-40c0-a64a-3e11fe4ce48c)
+
+# Flip the original image vertically and display it:
 
 
-![Screenshot 2024-09-07 222716](https://github.com/user-attachments/assets/01544e7e-dcf0-425a-aabb-a3245ad10b91)
+![Screenshot 2024-09-09 161035](https://github.com/user-attachments/assets/2fb6ecd5-1f11-4a54-a687-a14baf866342)
 
-![Screenshot 2024-09-07 222706](https://github.com/user-attachments/assets/7f6e8cd3-f599-4fb2-b317-89925209ddd5)
+### viii)Write and Save the Modified Image
+```
+# Step 8: Write and Save the Modified Image
+output_path = 'output.jpg'
+cv2.imwrite(output_path, image_with_text)
+print(f"Modified image saved as {output_path}")
+```
+### OUTPUT:
+![Screenshot 2024-09-09 161208](https://github.com/user-attachments/assets/d914c02a-eade-42b4-a9df-c2ca87de24a7)
 
-![Screenshot 2024-09-07 222659](https://github.com/user-attachments/assets/b5e5e67c-eddb-43b8-97eb-89fb682902ed)
-
-
-![Screenshot 2024-09-07 222650](https://github.com/user-attachments/assets/e4144f0e-e569-4e22-80b6-16df3115c34d)
-
-<br>
-<br>
-
-# Result:
-
+## Result:
 Thus the images are read, displayed, and written ,and color conversion was performed  successfully using the python program.
-
-
-
-
-
-
 
