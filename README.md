@@ -1,4 +1,4 @@
-![Screenshot 2024-09-09 154823](https://github.com/user-attachments/assets/9f19077e-177b-4327-9c7a-6d073b16aada)
+
 
 
 # COLOR_CONVERSIONS_OF-IMAGE
